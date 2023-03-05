@@ -1,2 +1,2 @@
 # anidge
-## Next.js × NestjS
+## Next.js × NestJS
