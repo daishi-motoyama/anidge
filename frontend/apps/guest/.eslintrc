@@ -1,0 +1,10 @@
+{
+  "extends": ["@anidge/eslint-config/next"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json"
+  },
+  "rules": {
+    "react/display-name": "off"
+  }
+}

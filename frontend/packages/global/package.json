@@ -1,0 +1,14 @@
+{
+  "name": "@anidge/global",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "lint": "run-s lint:* -c",
+    "lint:eslint": "eslint --ext .js,.ts,.jsx,.tsx --max-warnings 0 .",
+    "lint:prettier": "prettier --check .",
+    "lint:tsc": "tsc --pretty --noEmit",
+    "format": "run-s format:eslint format:prettier",
+    "format:eslint": "yarn lint:eslint --fix",
+    "format:prettier": "yarn lint:prettier --write"
+  }
+}

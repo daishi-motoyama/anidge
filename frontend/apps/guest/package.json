@@ -1,0 +1,21 @@
+{
+  "name": "guest",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "run-p dev:*",
+    "dev:next": "next dev",
+    "dev:path": "yarn run generate:path --watch",
+    "build": "pathpida --ignorePath .gitignore && next build",
+    "start": "next start",
+    "lint": "run-s lint:* -c",
+    "lint:eslint": "eslint --ext .js,.ts,.jsx,.tsx --max-warnings 0 .",
+    "lint:prettier": "prettier --check .",
+    "lint:tsc": "tsc --pretty --noEmit",
+    "format": "run-s format:eslint format:prettier",
+    "format:eslint": "yarn lint:eslint --fix",
+    "format:prettier": "yarn lint:prettier --write",
+    "generate:page": "scaffdog generate page",
+    "generate:path": "pathpida --enableStatic --ignorePath .gitignore --output src/lib/pathpida"
+  }
+}
