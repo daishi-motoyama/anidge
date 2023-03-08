@@ -5,22 +5,26 @@ services:
       context: .
       dockerfile: .docker/backend/Dockerfile
     ports:
-      - '4000:3000'
+      - '${BACKEND_PORT}:3000'
+      - '${STUDIO_PORT}:5555'
     depends_on:
-      - mysql
+      - db
     volumes:
       - './backend:/var/www'
     tty: true
     stdin_open: true
-  mysql:
+  db:
     image: 'mysql:8.0.32'
     ports:
-      - '4306:3306'
+      - '${DB_PORT}:3306'
     environment:
-      MYSQL_DATABASE: 'anidge'
-      MYSQL_ROOT_PASSWORD: 'password'
-      MYSQL_USER: 'anidge'
-      MYSQL_PASSWORD: 'password'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      MYSQL_ROOT_HOST: '%'
+    hostname: 'anidge'
+    user: 'root'
     volumes:
       - 'db:/var/lib/mysql'
 volumes:
