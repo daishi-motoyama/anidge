@@ -1,0 +1,9 @@
+database/
+dist/
+**/node_modules/
+*.config.js
+.*lintrc.js
+*.json
+.prettierrc.js
+eslintrc.js
+*.gql
