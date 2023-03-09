@@ -5,6 +5,7 @@ import { UserResolver } from '@src/modules/shared/user/user.resolver'
 import { UserService } from '@src/modules/shared/user/user.service'
 
 @Module({
+  exports: [UserService],
   imports: [PrismaModule],
   providers: [UserService, UserResolver],
 })
