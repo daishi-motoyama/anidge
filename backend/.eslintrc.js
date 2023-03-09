@@ -61,6 +61,5 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
-    '@typescript-eslint/no-unnecessary-condition': 'warn',
   },
 }
