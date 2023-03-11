@@ -17,4 +17,20 @@ model User {
   password    String   @db.VarChar(255)
   createdAt   DateTime @default(now()) @db.Timestamp(0)
   updatedAt   DateTime @updatedAt @db.Timestamp(0)
+  Profile     Profile?
+}
+
+model Profile {
+  id            Int      @id @default(autoincrement())
+  firstName     String   @db.VarChar(255)
+  lastName      String   @db.VarChar(255)
+  firstNameKana String   @db.VarChar(255)
+  lastNameKana  String   @db.VarChar(255)
+  gender        String   @db.VarChar(255)
+  phoneNumber   String   @db.VarChar(255)
+  birthday      DateTime @db.Date
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        Int      @unique
+  createdAt     DateTime @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime @updatedAt @db.Timestamp(0)
 }

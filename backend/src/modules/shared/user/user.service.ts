@@ -32,7 +32,7 @@ export class UserService {
       },
     })
 
-    if (user.id)
+    if (user)
       throw new BadRequestException(
         '入力されたメールアドレスは、既に使用されています'
       )
