@@ -4,10 +4,12 @@ import { Profile, User } from '@prisma/client'
 
 import { PrismaService } from '@src/modules/shared/prisma/prisma.service'
 import { CreateProfileInput } from '@src/modules/shared/profile/dtos/createProfile.input'
+import { UpdateProfileInput } from '@src/modules/shared/profile/dtos/updateProfile.input'
 
 @Injectable()
 export class ProfileService {
   constructor(private readonly prismaService: PrismaService) {}
+
   async createProfile(
     @Args('createProfileInput') createProfileInput: CreateProfileInput,
     authUser: User
@@ -37,6 +39,35 @@ export class ProfileService {
       },
       where: {
         userId: createProfileInput.userId,
+      },
+    })
+  }
+
+  async updateProfile(
+    @Args('updateProfileInput') updateProfileInput: UpdateProfileInput,
+    authUser: User
+  ): Promise<Profile> {
+    const profile = await this.prismaService.profile.findUnique({
+      where: { id: updateProfileInput.id },
+    })
+    if (!profile) throw new BadRequestException('プロフィールが見つかりません')
+    if (authUser.id !== profile.userId)
+      throw new BadRequestException('ユーザーIDと認証ユーザーIDが一致しません')
+    return this.prismaService.profile.update({
+      data: {
+        birthday: updateProfileInput.birthday
+          ? new Date(updateProfileInput.birthday)
+          : profile.birthday,
+        firstName: updateProfileInput.firstName,
+        firstNameKana: updateProfileInput.firstNameKana,
+        gender: updateProfileInput.gender,
+        lastName: updateProfileInput.lastName,
+        lastNameKana: updateProfileInput.lastNameKana,
+        phoneNumber: updateProfileInput.phoneNumber,
+      },
+      include: { user: true },
+      where: {
+        id: updateProfileInput.id,
       },
     })
   }

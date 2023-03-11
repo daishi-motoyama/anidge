@@ -71,6 +71,9 @@ type Mutation {
 
   """サインイン"""
   signIn(signInInput: SignInInput!): SignInResponse!
+
+  """プロフィール更新"""
+  updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
 }
 
 type Profile {
@@ -130,6 +133,32 @@ type SignInResponse {
 
   """ユーザー"""
   user: User!
+}
+
+input UpdateProfileInput {
+  """生年月日"""
+  birthday: String
+
+  """名前"""
+  firstName: String
+
+  """名前(フリガナ)"""
+  firstNameKana: String
+
+  """性別"""
+  gender: Gender
+
+  """プロフィールID"""
+  id: Int!
+
+  """苗字"""
+  lastName: String
+
+  """苗字(フリガナ)"""
+  lastNameKana: String
+
+  """電話番号"""
+  phoneNumber: String
 }
 
 type User {
