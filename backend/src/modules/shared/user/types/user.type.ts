@@ -1,7 +1,7 @@
 import { Field, HideField, Int, ObjectType } from '@nestjs/graphql'
 
 import { Profile } from '@src/modules/shared/profile/types/profile.type'
-@ObjectType()
+@ObjectType({ isAbstract: true })
 export class User {
   @Field(() => Int, { description: 'ユーザーID' })
   id: number

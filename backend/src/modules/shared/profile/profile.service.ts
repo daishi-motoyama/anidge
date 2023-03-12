@@ -1,5 +1,4 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
-import { Args } from '@nestjs/graphql'
 import { Profile, User } from '@prisma/client'
 
 import { PrismaService } from '@src/modules/shared/prisma/prisma.service'
@@ -11,7 +10,7 @@ export class ProfileService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async createProfile(
-    @Args('createProfileInput') createProfileInput: CreateProfileInput,
+    createProfileInput: CreateProfileInput,
     authUser: User
   ): Promise<Profile> {
     if (authUser.id !== createProfileInput.userId) {
@@ -44,7 +43,7 @@ export class ProfileService {
   }
 
   async updateProfile(
-    @Args('updateProfileInput') updateProfileInput: UpdateProfileInput,
+    updateProfileInput: UpdateProfileInput,
     authUser: User
   ): Promise<Profile> {
     const profile = await this.prismaService.profile.findUnique({
