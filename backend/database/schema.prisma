@@ -11,13 +11,14 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  email       String   @unique
-  displayName String   @db.VarChar(255)
-  password    String   @db.VarChar(255)
-  createdAt   DateTime @default(now()) @db.Timestamp(0)
-  updatedAt   DateTime @updatedAt @db.Timestamp(0)
-  Profile     Profile?
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  displayName   String         @db.VarChar(255)
+  password      String         @db.VarChar(255)
+  createdAt     DateTime       @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime       @updatedAt @db.Timestamp(0)
+  profile       Profile?
+  organizations Organization[]
 }
 
 model Profile {
@@ -33,4 +34,14 @@ model Profile {
   userId        Int      @unique
   createdAt     DateTime @default(now()) @db.Timestamp(0)
   updatedAt     DateTime @updatedAt @db.Timestamp(0)
+}
+
+model Organization {
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  entityType String   @db.VarChar(255)
+  createdAt  DateTime @default(now()) @db.Timestamp(0)
+  updatedAt  DateTime @updatedAt @db.Timestamp(0)
+  ownerId    Int
+  owner      User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }

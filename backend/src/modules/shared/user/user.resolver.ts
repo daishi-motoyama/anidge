@@ -9,9 +9,9 @@ import { UserService } from '@src/modules/shared/user/user.service'
 @Resolver()
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
-  @Query(() => UserType, { description: 'ユーザー取得', nullable: true })
+  @Query(() => UserType, { description: 'ユーザー詳細', nullable: true })
   @UseGuards(JwtAuthGuard)
-  async getUser(
+  async user(
     @Args('id', { description: 'ユーザーID', type: () => Int }) id: number
   ): Promise<User> {
     return await this.userService.getUserById(id)

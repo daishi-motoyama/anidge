@@ -112,8 +112,8 @@ type Profile {
 }
 
 type Query {
-  """ユーザー取得"""
-  getUser(
+  """ユーザー詳細"""
+  user(
     """ユーザーID"""
     id: Int!
   ): User

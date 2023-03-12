@@ -3,7 +3,7 @@ import { Field, GraphQLISODateTime, Int, ObjectType } from '@nestjs/graphql'
 import { Gender } from '@src/common/enums/gender'
 import { User } from '@src/modules/shared/user/types/user.type'
 
-@ObjectType()
+@ObjectType({ isAbstract: true })
 export class Profile {
   @Field(() => Int, { description: 'プロフィールID' })
   id: number
